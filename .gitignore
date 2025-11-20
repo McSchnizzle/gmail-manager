@@ -5,6 +5,7 @@ client_secret_*.json
 
 # Local Configuration
 claude_desktop_config.json
+.mcp.json
 
 # Python
 __pycache__/

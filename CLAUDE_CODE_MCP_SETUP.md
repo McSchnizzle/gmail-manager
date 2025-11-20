@@ -1,31 +1,41 @@
 # Setting Up Gmail MCP Server in Claude Code
 
-## Option 1: Configure via Claude Code Settings (Recommended)
+## Quick Setup
 
-1. Open Claude Code settings (Cmd+,)
-2. Search for "MCP" or "Model Context Protocol"
-3. Add the Gmail MCP server configuration:
+1. **Copy the example configuration**:
+   ```bash
+   cp .mcp.json.example .mcp.json
+   ```
 
-```json
-{
-  "gmail": {
-    "command": "python3",
-    "args": ["/Users/paulbrown/Desktop/coding-projects/claude-gmail-manager/gmail_mcp.py"],
-    "env": {
-      "GMAIL_TOKEN_PATH": "/Users/paulbrown/Desktop/coding-projects/claude-gmail-manager/gmail_token.pickle"
-    }
-  }
-}
-```
+2. **Edit `.mcp.json`** with your absolute paths:
+   ```json
+   {
+     "mcpServers": {
+       "gmail": {
+         "command": "python3",
+         "args": [
+           "/absolute/path/to/gmail_mcp.py"
+         ],
+         "env": {
+           "GMAIL_TOKEN_PATH": "/absolute/path/to/gmail_token.pickle"
+         }
+       }
+     }
+   }
+   ```
 
-## Option 2: Direct Configuration File
+3. **Update the paths** to match your system:
+   - Replace `/absolute/path/to/gmail_mcp.py` with the full path to this project's `gmail_mcp.py`
+   - Replace `/absolute/path/to/gmail_token.pickle` with the full path to your token file
 
-If Claude Code uses a configuration file (similar to Claude Desktop), it may be located at:
-- `~/.config/claude-code/mcp_settings.json` (Linux)
-- `~/Library/Application Support/Claude Code/mcp_settings.json` (macOS)
-- `%APPDATA%\Claude Code\mcp_settings.json` (Windows)
+4. **Restart Claude Code** completely
 
-Add the same JSON configuration to that file.
+## Configuration Details
+
+The `.mcp.json` file at your project root configures MCP servers for Claude Code:
+- **Local scope**: Project-specific configuration
+- **Loaded on startup**: Changes require restart
+- **Not in git**: `.mcp.json` is gitignored (contains local paths)
 
 ## Verify Setup
 
