@@ -1,0 +1,250 @@
+{
+  "version": "1.0",
+  "last_updated": "2025-11-18",
+  "patterns": {
+    "archive": [
+      {
+        "name": "Google Calendar Notifications",
+        "sender": "calendar-notification@google.com",
+        "subject_contains": null,
+        "age_days": 1,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Archive event notifications older than 24 hours"
+      },
+      {
+        "name": "Cash App Transactions",
+        "sender": "cash@square.com",
+        "subject_contains": "you spent",
+        "age_days": 3,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Archive transaction emails older than 72 hours"
+      },
+      {
+        "name": "Food Delivery Receipts",
+        "sender_pattern": "(doordash|ubereats|grubhub|postmates|hotlips|toasttab)",
+        "subject_contains": "(order|receipt|confirmation)",
+        "age_days": 5,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Archive food delivery and restaurant order receipts older than 5 days"
+      },
+      {
+        "name": "Microsoft Non-Critical Updates",
+        "sender": "microsoft-noreply@microsoft.com",
+        "subject_excludes": "receipt",
+        "age_days": 14,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Archive Microsoft service updates older than 2 weeks (excluding receipts)"
+      },
+      {
+        "name": "Robotime Online",
+        "sender_contains": "robotime",
+        "subject_contains": null,
+        "age_days": null,
+        "confidence": 100,
+        "last_confirmed": "Initial setup",
+        "notes": "Archive all Robotime promotional emails"
+      },
+      {
+        "name": "ElevenLabs Emails",
+        "sender_contains": "elevenlabs.io",
+        "subject_contains": null,
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-18",
+        "notes": "Archive ElevenLabs promotional and update emails older than 1 week (user specifically requested archive, not delete)"
+      }
+    ],
+    "delete": [
+      {
+        "name": "Bridgerise Daily Digests",
+        "sender": "paul@bridgerise.org",
+        "subject_contains": "Daily Digest",
+        "age_days": 1,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Delete daily digest emails older than 24 hours"
+      },
+      {
+        "name": "USPS Informed Delivery",
+        "sender": "USPSInformeddelivery@email.informeddelivery.usps.com",
+        "subject_contains": "Daily Digest",
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Delete USPS daily digests older than 1 week"
+      },
+      {
+        "name": "Google Alerts Daily Digests",
+        "sender": "googlealerts-noreply@google.com",
+        "subject_contains": "Daily Digest",
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Delete Google Alerts daily digests older than 1 week"
+      },
+      {
+        "name": "YouTube TV Promotional",
+        "sender": "no-reply@youtube.com",
+        "subject_contains": null,
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Delete YouTube TV promotional emails older than 1 week"
+      },
+      {
+        "name": "Ridwell Notifications",
+        "sender": "help@em.ridwell.com",
+        "subject_contains": null,
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Delete Ridwell pickup notifications older than 1 week"
+      },
+      {
+        "name": "Spotify Concert Presales",
+        "sender_contains": "spotify",
+        "subject_contains": "(presale|concert)",
+        "age_days": 3,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Delete Spotify concert presale emails older than 3 days"
+      },
+      {
+        "name": "NBC Promotional",
+        "sender": "no-reply@gowatch.nbc.com",
+        "subject_contains": null,
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Delete NBC promotional emails older than 1 week"
+      },
+      {
+        "name": "Oura Ring Marketing",
+        "sender_contains": "ouraring.com",
+        "subject_contains": null,
+        "age_days": 14,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Delete Oura Ring marketing emails older than 2 weeks"
+      },
+      {
+        "name": "Google Store Promotions",
+        "sender_contains": "googlestore",
+        "subject_contains": null,
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Delete Google Store promotional emails older than 1 week"
+      },
+      {
+        "name": "Lyft and Uber Receipts",
+        "sender_pattern": "(lyft|uber)",
+        "subject_contains": "receipt",
+        "age_days": 10,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Delete ride-sharing receipts older than 10 days"
+      },
+      {
+        "name": "Login Notifications (Any Service)",
+        "subject_contains": "(new login|login notification|signed in)",
+        "sender_pattern": null,
+        "age_days": 10,
+        "confidence": 100,
+        "last_confirmed": "2025-11-17",
+        "notes": "Delete login notification emails from any service older than 10 days"
+      },
+      {
+        "name": "Old Vercel Deployment Errors",
+        "sender": "Vercel",
+        "subject_contains": "(deployment|error)",
+        "age_days": 3,
+        "confidence": 100,
+        "last_confirmed": "Initial setup",
+        "notes": "Delete Vercel deployment errors older than 3 days"
+      },
+      {
+        "name": "Burgerville Promotional",
+        "sender_contains": "burgerville.com",
+        "subject_contains": null,
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-18",
+        "notes": "Delete Burgerville restaurant promotional emails older than 1 week"
+      },
+      {
+        "name": "TransUnion Promotional",
+        "sender_contains": "transunion.com",
+        "subject_contains": null,
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-18",
+        "notes": "Delete TransUnion credit monitoring promotional emails older than 1 week"
+      },
+      {
+        "name": "Moberi Promotional",
+        "sender_contains": "moberi",
+        "subject_contains": null,
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-18",
+        "notes": "Delete Moberi smoothie shop promotional emails older than 1 week"
+      },
+      {
+        "name": "Zillow Market Updates",
+        "sender_contains": "zillow.com",
+        "subject_contains": null,
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-18",
+        "notes": "Delete Zillow real estate market updates and home reports older than 1 week"
+      },
+      {
+        "name": "Higgsfield Promotional",
+        "sender_contains": "higgsfield.ai",
+        "subject_contains": null,
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-18",
+        "notes": "Delete Higgsfield AI product promotional emails older than 1 week"
+      },
+      {
+        "name": "Google Maps Platform Newsletters",
+        "sender": "GoogleMapsPlatform@google.com",
+        "subject_contains": null,
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-18",
+        "notes": "Delete Google Maps Platform marketing emails older than 1 week"
+      },
+      {
+        "name": "inKind Promotional",
+        "sender_contains": "inkind.com",
+        "subject_contains": null,
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-18",
+        "notes": "Delete inKind restaurant credit card promotional emails older than 1 week"
+      },
+      {
+        "name": "MindPal Promotional",
+        "sender_contains": "mindpal.io",
+        "subject_contains": null,
+        "age_days": 7,
+        "confidence": 100,
+        "last_confirmed": "2025-11-18",
+        "notes": "Delete MindPal AI productivity tool promotional emails older than 1 week"
+      }
+    ]
+  },
+  "summary": {
+    "total_patterns": 26,
+    "archive_patterns": 6,
+    "delete_patterns": 20,
+    "active_confidence_100": 26
+  }
+}
