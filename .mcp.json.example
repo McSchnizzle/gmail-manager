@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "gmail": {
-      "command": "python3",
+      "command": "python3.13",
       "args": [
         "/absolute/path/to/your/gmail_mcp.py"
       ],

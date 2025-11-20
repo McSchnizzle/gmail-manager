@@ -3,49 +3,102 @@ You are executing the /clean50 command for Gmail inbox management.
 ## Task
 Automatically clean 50 emails that match learned patterns with 100% confidence. No user approval needed.
 
+## Agent-Based Architecture
+
+This command uses two specialized agents to keep the main conversation context lean:
+
+1. **gmail-find agent**: Searches for matching emails and returns compact results (just IDs)
+2. **gmail-process agent**: Executes bulk archive/delete operations in its own context
+
 ## Instructions
 
-1. **Load Patterns**: Read `gmail_cleanup_patterns.json` to get all patterns with 100% confidence
+### Step 1: Launch Gmail Find Agent
 
-2. **Find Exact Matches**:
-   - Use gmail_search_emails to find emails matching patterns EXACTLY
-   - Match sender/sender_contains/sender_pattern fields precisely
-   - Match subject_contains/subject_excludes if specified
-   - Apply age_days threshold correctly (calculate from email date)
-   - Collect up to 50 emails that perfectly match learned patterns
+Launch the `gmail-find` agent to search for emails matching patterns:
 
-3. **Take Action Immediately**:
-   - Archive emails matching archive patterns using gmail_archive_emails
-   - Delete emails matching delete patterns using gmail_delete_emails
-   - Process in batches if needed for API efficiency
-   - Track what was cleaned for the summary
+```
+Task: Find up to 50 emails matching patterns in gmail_cleanup_patterns.json
 
-4. **Show Summary**:
-   ```
-   ✓ Cleaned 50 emails from inbox
+Input:
+{
+  "mode": "cleanup",
+  "patterns_file": "gmail_cleanup_patterns.json",
+  "date_reference": "YYYY-MM-DD",  // Use today's date
+  "max_emails": 50
+}
 
-   Archived: 28 emails
-   - Google Calendar Notifications (15)
-   - Food Delivery Receipts (8)
-   - Cash App Transactions (5)
+Expected output: Compact JSON with message IDs grouped by action type (archive/delete) and by pattern.
+```
 
-   Deleted: 22 emails
-   - Bridgerise Daily Digests (10)
-   - Promotional emails (12)
+The agent will:
+- Read gmail_cleanup_patterns.json
+- Execute searches for all 100% confidence patterns
+- Calculate age thresholds based on today's date
+- Return only message IDs (not full email metadata)
+- Keep heavy search results in agent context
 
-   Total processed: 50 emails
-   ```
+### Step 2: Launch Gmail Process Agent
 
-## Pattern Matching Rules
+Once you receive the compact results from gmail-find, launch the `gmail-process` agent:
+
+```
+Task: Process the following email operations
+
+Input:
+{
+  "archive": ["msg_id_1", "msg_id_2", ...],
+  "delete": ["msg_id_10", "msg_id_11", ...],
+  "batch_size": 50
+}
+
+Expected output: Summary of operations performed (counts, success/failure).
+```
+
+The agent will:
+- Archive emails in batches
+- Delete emails in batches
+- Handle any errors gracefully
+- Return compact summary of what was processed
+
+### Step 3: Display Summary
+
+Format and display the combined results to the user:
+
+```
+✓ Cleaned [N] emails from inbox
+
+Archived: [N] emails
+- [Pattern Name] (count)
+- [Pattern Name] (count)
+...
+
+Deleted: [N] emails
+- [Pattern Name] (count)
+- [Pattern Name] (count)
+...
+
+Total processed: [N] emails
+```
+
+## Pattern Matching Rules (Handled by gmail-find agent)
+
 - Must match patterns EXACTLY from gmail_cleanup_patterns.json
 - Only use patterns with confidence: 100
 - Calculate email age based on date headers and age_days threshold
 - Respect the action type (archive vs delete) from pattern category
 - If patterns exist but don't specify age_days, match on sender/subject only
 
-## Important
-- No user confirmation needed - execute immediately
+## Important Notes
+
+- **No user confirmation needed** - execute immediately
 - Only process emails with 100% confident pattern matches
 - If fewer than 50 emails match, clean what you find and report actual count
 - Group summary by pattern for clarity
-- Be efficient with API calls (batch operations when possible)
+- Agents handle all heavy lifting and keep main thread context clean
+
+## Benefits of Agent-Based Approach
+
+- **Context Efficiency**: Main thread uses ~500 tokens instead of 20k+ tokens
+- **Parallel Processing**: Agents can work independently
+- **Error Isolation**: Agent errors don't pollute main conversation
+- **Reusability**: Same agents used by /clean100 command
